@@ -31,50 +31,68 @@
 
 
 import re
-
+#open the input
 file = open("dec02.dat", mode="r")
-
+#read input
 pwList = file.readlines()
 file.close()
-#Part 1
+# Part 1
+
+# count Correct Passwords over the input
 correctPW = 0
 
+# each entry is a tuple of information
+# for every entry you have to
 for pwTuple in pwList:
+    # split the front part and the back part into list entries
     pwTupleArray = pwTuple.split(": ")
+    # the second entry in these list needs to get rid of the "newline"
     pwTupleArray[1] = pwTupleArray[1].rstrip("\n")
+    # the first entry needs to be split into the three conditions
     pwCondArray = re.split('-| ',pwTupleArray[0])
     countChar = 0
+    # the lowest amount of appearance of the searched character
     lowest = int(pwCondArray[0])
+    # the highest amount
     highest = int(pwCondArray[1])
+    # the character searched for
     searchChar = pwCondArray[2]
+    # now count the searched char in the string
     for i in pwTupleArray[1]:
         if i == searchChar:
             countChar += 1
+    # now check if this count ist between lowest and highest count
     if lowest <= countChar:
         if highest >= countChar:
+            # if so count it
             correctPW += 1
 
 print("Part 1: " + str(correctPW))
 
-#Part 2
+# Part 2
 
-file = open("dec02.dat", mode="r")
-
-pwList = file.readlines()
-file.close()
-
+# count again
 correctPWPart2 = 0
 
+# the arrays above are potentiale filled with corrupted data
+# so I build the stack again
+
+# each entry is a tuple of information
+# for every entry you have to
 for pwTuple in pwList:
+    # split the front part and the back part into list entries
     pwTupleArray = pwTuple.split(": ")
-    #pwTupleArray[1] = pwTupleArray[1].rstrip("\n")
+    # the conditions are stored in the first entry and needs to be split in a new list
     pwCondArray = re.split('-| ',pwTupleArray[0])
-    countChar = 0
+    # now its not low- and high-counts but targets in the array
+    # -1 because of index 0
     firstTarget = int(pwCondArray[0])-1
     secondTarget = int(pwCondArray[1])-1
     searchChar = pwCondArray[2]
 
+    # the entry in pwTupleArray[1] needs to be a list itself
     pw = list(pwTupleArray[1])
+    # if there is ONLY ONE Target hit its valid
     if (pw[firstTarget] == searchChar) != (pw[secondTarget] == searchChar):
         correctPWPart2 += 1
 
