@@ -1,7 +1,17 @@
-#import dec01
-#run dec01
-#dec01
+import time
+start_time = time.time()
 
-import dec02
+
+
+import dec01
+#run dec01
+dec01
+
+#import dec02
 #run dec02
-dec02
+#dec02
+
+
+
+
+print("--- %s seconds ---" % (time.time() - start_time))

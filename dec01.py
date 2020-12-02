@@ -18,20 +18,22 @@ file = open('dec01.dat', mode='r')
 
 # readlines() gives a list of lines with "\n"
 intList: list[str] = file.readlines()
+for entry in intList:
+    intList[intList.index(entry)] = entry.strip('\n')
 # cleanup
 file.close()
 
 # for each line in the list
 for x in intList:
+    x1 = int(x)
     # numbers from striped strings
-    x1 = int(x.rstrip("\n"))
-    for y in intList:
-        y1 = int(y.rstrip("\n"))
+    for y in intList[intList.index(x)+1:]:
+        y1 = int(y)
         # chapter 2 addition
-        for z in intList:
-            z1 = int(z.rstrip("\n"))
-
+        for z in intList[intList.index(y)+1:]:
+            z1 = int(z)
             # the maths
             if x1 + y1 + z1 == 2020:
+                print("x = " + x + "; y = " + y + "; z = " + z)
                 print(x1 * y1 * z1)
-                exit()
+
