@@ -49,7 +49,7 @@ for pwTuple in pwList:
     # the second entry in these list needs to get rid of the "newline"
     pwTupleArray[1] = pwTupleArray[1].rstrip("\n")
     # the first entry needs to be split into the three conditions
-    pwCondArray = re.split('-| ',pwTupleArray[0])
+    pwCondArray = re.split('-| ', pwTupleArray[0])
     countChar = 0
     # the lowest amount of appearance of the searched character
     lowest = int(pwCondArray[0])
